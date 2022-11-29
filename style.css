@@ -1,0 +1,42 @@
+header {
+    padding-top: 4em;
+}
+
+main {
+    padding-top: 2em;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.tabulator {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+svg {
+    margin-right: .4em;
+}
+
+
+
+h1 {
+    --s: 0.1em;   /* the thickness of the line */
+    --c: #801336; /* the color */
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: #0000;
+    padding-bottom: var(--s);
+    background: 
+      linear-gradient(90deg,var(--c) 100%,#000 0) calc(100% - var(--_p,0%))/200% 100%,
+      linear-gradient(var(--c) 0 0) 0% 100%/var(--_p,0%) var(--s) no-repeat;
+    -webkit-background-clip: text,padding-box;
+            background-clip: text,padding-box;
+    transition: 0.5s;
+    font-family: system-ui, sans-serif;
+    font-size: 5rem;
+    cursor: pointer;
+  }
+  h1:hover {--_p: 100%}
+  
