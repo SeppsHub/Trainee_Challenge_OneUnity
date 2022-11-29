@@ -28,60 +28,52 @@ const getFormJSON = (form) => {
   }, {});
 };
 
-// handle the form submission event, convert form to JSON, 
-// store Input in tempData variable, push tempData array to tableDB
-
+// handle the form submission event, convert form to JSON, store Input in tempData variable, push tempData array to tableDB
 const handler = () => {
   let tempData = [];
   const result = getFormJSON(formElement);
-  //tempData.pop();
-  //tempData.push(result);
   tempData = JSON.parse(localStorage.getItem('tableDB')) || [];
   tempData.unshift(result);
   localStorage.setItem('tableDB', JSON.stringify(tempData));
-  //tableDB.push(tempData[0]);
-  //localStorage.tableDB = JSON.stringify(tableDB);
   localDB = JSON.parse(localStorage.tableDB);
 };
 
 //create & configure table 
-
-
 const table = new Tabulator("#applicationTable", {
   data: localDB,
   minHeight: "5 em",
   index: "lastName",
-  layout: "fitColumns",      //fit columns to width of table
+  layout: "fitColumns",
   responsiveLayout: "true",
-  addRowPos: "top",          //when adding a new row, add it to the top of the table
-  history: true,             //allow undo and redo actions on the table
-  pagination: "true",       //paginate the data
+  addRowPos: "top",
+  history: true,
+  pagination: "true",
   paginationSize: "10",
-  paginationSizeSelector: [25, true],         //allow 7 rows per page of data
-  paginationCounter: "rows", //display count of paginated rows in footer
+  paginationSizeSelector: [25, true],
+  paginationCounter: "rows",
   columnDefaults: {
-    tooltip: true,         //show tool tips on cells
+    tooltip: true,
   },
   columns: [
     { title: "First Name", field: "firstName", widthGrow: 0.5, editor: "input" },
     { title: "Last Name", field: "lastName", widthGrow: 0.5, editor: "input" },
-    { title: "Department", field: "department", widthGrow: 0.5, editor: "list", editorParams: {
+    {
+      title: "Department", field: "department", widthGrow: 0.5, editor: "list", editorParams: {
         values: ["Sales", "Marketing", "Development", "Consulting"],
-    }},
+      }
+    },
     { title: "Skills", field: "skills", widthGrow: 2, editor: "input" }
   ],
 });
 
-
 //update Table after User Input is being sent to tableDB Array 
 document.getElementById("add").onclick = function () { updateTable() };
-
 function updateTable() {
   formElement.addEventListener("submit", handler);
   setTimeout(function () {
     table.setData(localDB);
   }, 200);
-}
+};
 
 //trigger download of data.csv file
 document.getElementById("download-csv").addEventListener("click", function () {
